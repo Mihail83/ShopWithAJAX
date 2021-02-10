@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ShopMinViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Магазины</h2>
+<div class="row col-xl-12 border-dark">     
+    <table class="table" >
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Время работы</th>
+                <th>вариант Тэг-хелпер</th>
+                <th>вариант Jquerry</th>
+            </tr>
+        </thead>
+       @foreach (var shop in Model)
+        {
+        <tr>
+        <td>@shop.Name</td>
+        <td>@shop.TimeOfWork</td>
+        <td>
+            <a href="#"
+               data-ajax="true"
+               data-ajax-method="Get"
+               data-ajax-url="@Url.Action("GetInformationAboutShop", "Home", new {id=shop.ShopId })"
+               data-ajax-mode="replace"
+               data-ajax-update="#informationAboutShop">More information</a>
+        </td>
+        <td class="AjaxLink"> @Html.ActionLink("More information", "GetInformationAboutShop", "Home", new { id = shop.ShopId })</td>
+
+        </tr>
+        }
+    </table>
+          
+</div>
+
+<article class="col-xl-10 border-dark">
+   <div class="row " id="informationAboutShop">
+
+   </div>
+
+</article>
